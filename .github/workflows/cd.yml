@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 jobs:
   deploy:
@@ -25,6 +26,8 @@ jobs:
         with:
           name: site-artifact
           path: site/
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v4
